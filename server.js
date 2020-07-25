@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: false }))
 
 //route that handles incoming long Url's
 app.post('/shortUrls', async (req, res) => {
-  const recieved_url = req.body.fullurl
-  const url = await ShortUrl.create({ full: recieved_url })
+  const recievedUrl = req.body.fullurl
+  const url = await ShortUrl.create({ full: recievedUrl })
   res.send({short:url.short})
 })
 
