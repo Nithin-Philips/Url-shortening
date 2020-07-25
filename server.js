@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: false }))
 app.post('/shortUrls', async (req, res) => {
   const recieved_url = req.body.fullurl
   const url = await ShortUrl.create({ full: recieved_url })
-  res.send({short:'https://nith.herokuapp.com/'+url.short})
+  res.send({short:url.short})
 })
 
 //route that handles incoming short Url's to be redirected
