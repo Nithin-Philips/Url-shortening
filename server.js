@@ -2,7 +2,6 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const validateUrl = require('url-validator')
 const ShortUrl = require('./models/shortUrl')
 const connectDB = require('./config/db');
 const shortUrl = require('./models/shortUrl');
@@ -18,14 +17,9 @@ app.use(express.urlencoded({ extended: false }))
 //route that handles incoming long Url's
 app.post('/shortUrls', async (req, res) => {
   const recievedUrl = req.body.fullurl
-  if(!validateUrl(recievedUrl)){
-  res.status(400).json('Invalid Url')
-  }
-  else{
-    const url = await ShortUrl.create({ full: recievedUrl })
-    res.send({short:url.short})
-  }
-})
+  const url = await ShortUrl.create({ full: recievedUrl })
+  res.send({short:url.short})
+  })
 
 //route that handles incoming short Url's to be redirected
 app.get('/:shortUrl', async (req, res) => {
